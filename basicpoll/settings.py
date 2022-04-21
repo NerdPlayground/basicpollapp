@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'drf-yasg',
     'corsheaders',
 ]
 
@@ -126,17 +125,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# SWAGGER Authentication SETTINGS
-SWAGGER_SETTINGS ={ 
-    'SECURITY_DEFINITIONS':{ 
-        'Bearer':{ 
-            'type':'apiKey', 
-            'name':'Authorization', 
-            'in':'header' 
-        } 
-    } 
-}
 
 # Allow external access
 CORS_ALLOW_ALL_ORIGINS= True
