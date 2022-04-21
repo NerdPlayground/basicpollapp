@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Polls</title>
+    </head>
+
+    <body>
+        <h1>Questions</h1>
+        <div class="questions-container">
+            <ol>
+                {% for question in questions %}
+                    <div class="question-body">
+                        <li>
+                            <h3>{{question.title}}</h3>
+                            <p>{{question.body}}</p>
+                            <a href="{% url 'question' question.id %}">Vote</a>
+                        </li>
+                    </div>
+                {% endfor %}
+            </ol>
+        </div>
+    </body>
+</html>
