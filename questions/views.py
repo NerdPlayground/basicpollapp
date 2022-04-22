@@ -2,10 +2,10 @@ from questions.models import Question
 from django.http import Http404,HttpResponse
 from django.shortcuts import render,redirect
 
-def all_questions(request):
+def home(request):
     questions= Question.objects.all()
     context= {"questions":questions}
-    return render(request,'questions/all-questions.html',context)
+    return render(request,'questions/home.html',context)
 
 def question(request,pk):
     try:
