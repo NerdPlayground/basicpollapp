@@ -6,7 +6,25 @@
     <body>
         <h3>Question: {{question.title}}</h3>
         <div class="question-container">
-            {{question.body}}
+            {{question.body}}<br/>
+            {% if error_message|length != 0 %}
+                <strong>{{error_message}}</strong>
+            {% endif %}
+            <form action="{% url 'questions:vote' question.id %}" method="POST">
+                {% csrf_token %}
+                <fieldset style="width:200px;">
+                    {% for choice in choices %}
+                        <input
+                            id="choice{{forloop.counter}}"
+                            type="radio"
+                            name="choice"
+                            value="{{choice.id}}"
+                        />
+                        <label for="choice{{forloop.counter}}">{{choice.body}}</label><br/>
+                    {% endfor %}
+                    <input type="submit" value="Submit">
+                </fieldset>
+            </form>
         </div>
     </body>
 </html>
