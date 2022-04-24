@@ -1,0 +1,7 @@
+[run]
+source= questions/,choices/,
+omit=
+    venv
+    */test/*
+    */migrations/*
+    */__init__.py
