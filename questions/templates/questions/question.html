@@ -1,32 +1,28 @@
-<html>
-    <head>
-        <title>Polls</title>
-    </head>
+{% extends "main.html" %}
 
-    <body>
-        <h3>Question: {{question.title}}</h3>
-        <div class="question-container">
-            {{question.body}}<br/>
-            {% if error_message|length != 0 %}
-                <strong>{{error_message}}</strong>
-            {% endif %}
-            <form action="{% url 'questions:vote' question.id %}" method="POST">
-                {% csrf_token %}
-                <fieldset style="width:200px;">
-                    {% for choice in choices %}
-                        <input
-                            id="choice{{forloop.counter}}"
-                            type="radio"
-                            name="choice"
-                            value="{{choice.id}}"
-                        />
-                        <label for="choice{{forloop.counter}}">{{choice.body}}</label><br/>
-                    {% endfor %}
-                    <input type="submit" value="Submit">
-                </fieldset>
-            </form>
-            <a href="{% url 'questions:home' %}">Home</a><br/>
-            <a href="{% url 'questions:results' question.id %}">Results</a>
-        </div>
-    </body>
-</html>
+{% block content %}
+<h3>Question: {{question.title}}</h3>
+<div class="question-container">
+    {{question.body}}<br/>
+    {% if error_message|length != 0 %}
+        <strong>{{error_message}}</strong>
+    {% endif %}
+    <form action="{% url 'questions:vote' question.id %}" method="POST">
+        {% csrf_token %}
+        <fieldset style="width:200px;">
+            {% for choice in choices %}
+                <input
+                    id="choice{{forloop.counter}}"
+                    type="radio"
+                    name="choice"
+                    value="{{choice.id}}"
+                />
+                <label for="choice{{forloop.counter}}">{{choice.body}}</label><br/>
+            {% endfor %}
+            <input type="submit" value="Submit">
+        </fieldset>
+    </form>
+    <a href="{% url 'questions:home' %}">Home</a><br/>
+    <a href="{% url 'questions:results' question.id %}">Results</a>
+</div>
+{% endblock %}
