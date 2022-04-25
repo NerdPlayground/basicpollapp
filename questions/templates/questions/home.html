@@ -3,16 +3,20 @@
 {% block content %}
 <h1>Home</h1>
 <div class="questions-container">
-    <ol>
-        {% for question in questions %}
-            <div class="question-body">
-                <li>
-                    <h3>{{question.title}}</h3>
-                    <p>{{question.body}}</p>
-                    <a href="{% url 'questions:question' question.id %}">Vote</a>
-                </li>
-            </div>
-        {% endfor %}
-    </ol>
+    {% if questions|length != 0 %}
+        <ol>
+            {% for question in questions %}
+                <div class="question-body">
+                    <li>
+                        <h3>{{question.title}}</h3>
+                        <p>{{question.body}}</p>
+                        <a href="{% url 'questions:question' question.id %}">Vote</a>
+                    </li>
+                </div>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <p>There are no polls available.</p>
+    {% endif %}
 </div>
 {% endblock %}
