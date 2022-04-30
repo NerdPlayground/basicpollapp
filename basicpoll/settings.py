@@ -133,5 +133,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Allow external access
 CORS_ALLOW_ALL_ORIGINS= True
 
+# Custom User model
+AUTH_USER_MODEL = "users.User"
+
 # Configure Django App for Heroku.
 django_heroku.settings(locals())

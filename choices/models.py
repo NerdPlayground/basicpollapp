@@ -12,7 +12,7 @@ class Choice(models.Model):
         related_name='choices',
         on_delete=models.CASCADE
     )
-    body= models.CharField(max_length=255)
+    body= models.TextField()
     votes= models.IntegerField(default=0)
 
     def __str__(self):
