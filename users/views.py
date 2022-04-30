@@ -1,3 +1,4 @@
+from choices.models import Choice
 from django.contrib import messages
 from django.http import Http404,HttpResponse
 from django.shortcuts import render,redirect
@@ -40,6 +41,12 @@ def login_user(request):
                 messages.error(request,"Error: Unable to login user")
         context= {"form":form}
         return render(request,"users/login.html",context)
+
+@login_required(login_url="authentication:login-user")
+def votes(request):
+    choices= request.user.votes.all()
+    context= {"choices":choices}
+    return render(request,"users/votes.html",context)
 
 @login_required(login_url="questions:home")
 def logout_user(request):

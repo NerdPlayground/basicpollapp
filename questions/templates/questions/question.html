@@ -4,30 +4,33 @@
 <div class="question-container">
     <h3>Question: {{question.title}}</h3>
     {{question.body}}<br/>
-    {% if error_message|length != 0 %}
-        <strong>{{error_message}}</strong>
+    {% if voted %}
+        <p>Vote: {{vote}}</p>
+    {% else %}
+        {% if error_message|length != 0 %}
+            <strong>{{error_message}}</strong>
+        {% endif %}
+        <div class="question-form">
+            <form action="{% url 'questions:vote' question.id %}" method="POST">
+                {% csrf_token %}
+                <fieldset>
+                    {% for choice in choices %}
+                        <div>
+                            <input
+                                id="choice{{forloop.counter}}"
+                                type="radio"
+                                name="choice"
+                                value="{{choice.id}}"
+                                class="question-form-input"
+                            />
+                            <label for="choice{{forloop.counter}}">{{choice.body}}</label><br/>
+                        </div>
+                    {% endfor %}
+                    <input type="submit" value="Submit" class="form-button">
+                </fieldset>
+            </form>
+        </div>
     {% endif %}
-    <div class="question-form">
-        <form action="{% url 'questions:vote' question.id %}" method="POST">
-            {% csrf_token %}
-            <fieldset>
-                {% for choice in choices %}
-                    <div>
-                        <input
-                            id="choice{{forloop.counter}}"
-                            type="radio"
-                            name="choice"
-                            value="{{choice.id}}"
-                            class="question-form-input"
-                        />
-                        <label for="choice{{forloop.counter}}">{{choice.body}}</label><br/>
-                    </div>
-                {% endfor %}
-                <input type="submit" value="Submit" class="form-button">
-            </fieldset>
-        </form>
-    </div>
-    <a href="{% url 'questions:home' %}">Home</a><br/>
     <a href="{% url 'questions:results' question.id %}">Results</a><br/>
 </div>
 {% endblock %}

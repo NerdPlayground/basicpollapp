@@ -45,6 +45,8 @@ def vote(request,pk):
         choice= Choice.objects.filter(question=question).get(id=request.POST.get('choice'))
         choice.votes= F("votes") + 1
         choice.save()
+        votes= request.user.votes.all().values()
+        choice.voters.add(request.user)
         return HttpResponseRedirect(reverse("questions:results",args=(question.id,)))
     except(KeyError, Choice.DoesNotExist):
         choices= Choice.objects.filter(question=question)
@@ -55,18 +57,27 @@ def vote(request,pk):
         }
         return render(request,'questions/question.html',context)
 
-def question(pk):
+def question(pk,user=None,vote=False):
+    voted,user_vote= False,None
     question= get_object_or_404(Question,pk=pk)
+    if vote:
+        user_vote= user.votes.all().filter(question=question)
+        if len(user_vote) > 0:
+            voted= True
+            user_vote= user_vote[0]
+
     choices= Choice.objects.filter(question=question)
     context= {
         "question":question,
-        "choices":choices
+        "choices":choices,
+        "voted":voted,
+        "vote":user_vote,
     }
     return context
 
 @login_required(login_url="authentication:login-user")
 def vote_question(request,pk):
-    context= question(pk)
+    context= question(pk,user=request.user,vote=True)
     return render(request,'questions/question.html',context)
 
 @login_required(login_url="authentication:login-user")

@@ -1,4 +1,8 @@
-<a href="{% url 'questions:home' %}">Home</a>
+<a href="{% url 'questions:home' %}">Home</a><br/>
+
+{% if not request.user.is_manager %}
+    <a href="{% url 'authentication:votes' %}">Votes</a>
+{% endif %}
 
 {% if request.user.is_authenticated %}
     <a href="{% url 'authentication:logout-user' %}">Logout</a>

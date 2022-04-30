@@ -13,5 +13,11 @@
             <input type="submit" value="Login" class="form-button"/>
         </form>
     </div>
+    <div>
+        <p>
+            Don't have an account?
+            <a href="{% url 'authentication:register-user' %}">Register</a>
+        </p>
+    </div>
 </body>
 {% endblock %}
