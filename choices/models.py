@@ -12,7 +12,11 @@ class Choice(models.Model):
         related_name='choices',
         on_delete=models.CASCADE
     )
-    body= models.CharField(max_length=255)
+    body= models.TextField()
+    voters= models.ManyToManyField(
+        "users.User",
+        related_name="votes"
+    )
     votes= models.IntegerField(default=0)
 
     def __str__(self):

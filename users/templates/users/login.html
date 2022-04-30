@@ -1,0 +1,23 @@
+{% extends "main.html" %}
+
+{% block content %}
+<body>
+    <div class="form">
+        <form method="POST" action="">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-field">
+                    {{field.label_tag}} {{field}}
+                </div>
+            {% endfor %}
+            <input type="submit" value="Login" class="form-button"/>
+        </form>
+    </div>
+    <div>
+        <p>
+            Don't have an account?
+            <a href="{% url 'authentication:register-user' %}">Register</a>
+        </p>
+    </div>
+</body>
+{% endblock %}

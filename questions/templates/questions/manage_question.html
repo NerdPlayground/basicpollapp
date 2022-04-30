@@ -1,0 +1,25 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div class="question-container">
+    <h3>Question: {{question.title}}</h3>
+    {{question.body}}<br/>
+    <a href="{% url 'choices:add-choice' question.id %}">Add Choice</a>
+    <a href="{% url 'questions:edit-question' question.id %}">Edit Question</a>
+    <a href="{% url 'questions:delete-question' question.id %}">Delete Question</a>
+    <div class="choice-container">
+        <ol>
+            {% for choice in choices %}
+                <li>
+                    <div class="choice">
+                        {{choice}}
+                        <a href="{% url 'choices:edit-choice' choice.id %}">Edit Choice</a>
+                        <a href="{% url 'choices:delete-choice' choice.id %}">Delete Choice</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+    <a href="{% url 'questions:results' question.id %}">Results</a><br/>
+</div>
+{% endblock %}

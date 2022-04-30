@@ -1,0 +1,13 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="votes-container">
+    <h1>My Votes</h1>
+    {% for choice in choices %}
+        <div class="vote">
+            <h3>Question: {{choice.question.title}}</h3>
+            {{choice.question.body}}<hr/>
+            <p>vote: {{choice}}</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

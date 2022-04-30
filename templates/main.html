@@ -1,9 +1,62 @@
 <html>
     <head>
         <title>Polls</title>
+        <!-- <style>
+            body{
+                font-family: Consolas;
+            }
+            
+            input{
+                width: 100%;
+            }
+            
+            textarea{
+                resize: none;
+                width: 100%;
+            }
+
+            .form-button{
+                width: 25%;
+                margin-left: 37.5%;
+                margin-right: 37.5%;
+                margin-top: 20px;
+            }
+
+            .form{
+                border: 10px solid black;
+                width: 33.33%;
+                margin-top: 10%;
+                margin-left: 33.33%;
+                margin-right: 33.33%;
+            }
+
+            .question-form{
+                width: 33.33%;
+            }
+
+            .question-form-input{
+                width: 10%;
+            }
+            
+            .form-field{
+                margin-bottom: 10px;
+                margin-left: 25%;
+				margin-right: 25%;
+            }
+        </style> -->
     </head>
 
     <body>
+        {% include "navigation.html" %}
+        
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
         {% block content %} 
         {% endblock %}
     </body>

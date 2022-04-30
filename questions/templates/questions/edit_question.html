@@ -1,0 +1,20 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h1>Edit Question</h1>
+<div class="form">
+    <form method="POST" action="">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Question</legend>
+            {% for field in form %}
+                <div class="form-field">
+                    {{field.label_tag}} {{field}}
+                </div>
+            {% endfor %}
+            <input type="submit" value="Edit" class="form-button"/>
+        </fieldset>
+    </form>
+    <a href="{% url 'questions:manage-question' question %}">Go To Question</a>
+</div>
+{% endblock %}
